@@ -1,6 +1,6 @@
 open class BitFieldGroup(val name: String, val fields: MutableMap<String, BitField> = mutableMapOf()): Collection<BitField> {
-	class BitFieldConversionException(message: String = "Could not convert the provided object to a BitFieldGroup"): Exception(message)
 	companion object {
+		class BitFieldConversionException(message: String = "Could not convert the provided object to a BitFieldGroup"): Exception(message)
 		fun from(name: String, data: Any): BitFieldGroup {
 			return BitFieldGroup(name, buildMap {
 				when(data) {
@@ -11,8 +11,6 @@ open class BitFieldGroup(val name: String, val fields: MutableMap<String, BitFie
 					}
 					else -> throw BitFieldConversionException()
 				}
-
-
 			}.toMutableMap())
 		}
 	}

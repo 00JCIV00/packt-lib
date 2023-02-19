@@ -46,7 +46,9 @@ abstract class Packet() {
 		var protocol: Int = 0
 		var headerChecksum: Int = 0
 		var sourceAddr: String = "0.0.0.0"
+			set (strIP) { field = validateIP(strIP) }
 		var destAddr: String = "0.0.0.0"
+			set (strIP) { field = validateIP(strIP) }
 		fun fillFields() {
 			fields["version"] = BitField.from(version, 4)
 			fields["headerLen"] = BitField.from(headerLen, 4)

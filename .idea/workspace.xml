@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15eda58b-3a4d-4e64-a572-7aa6db17a283" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_reflect_1_8_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packt-lib.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/BitField.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/BitFieldGroup.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Packet.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/PacktUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/TCPPacket.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/UDPPacket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/BitFieldGroup.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/BitFieldGroup.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Packet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Packet.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/PacktUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/PacktUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/TCPPacket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/TCPPacket.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +23,9 @@
         <option value="Kotlin File" />
       </list>
     </option>
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="afaezmgo" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

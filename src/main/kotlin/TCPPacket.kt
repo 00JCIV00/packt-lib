@@ -24,7 +24,7 @@ class TCPPacket(): Packet() {
 		var ackNum: Int = 0
 		var dataOffset: Int = 0
 		var reserved: Int = 0
-		var flags: Int = 0
+		var flags: Int = TCPFlags.FIN.bits
 		var window: Int = 0
 		var checksum: Int = 0
 		var urgPointer: Int = 0
@@ -51,7 +51,7 @@ fun tcpPacket(init: TCPPacket.() -> Unit): TCPPacket {
 	return tcpPacket
 }
 
-enum class TCPFlags(flag: Int) {
+enum class TCPFlags(val bits: Int) {
 	FIN(0b00000001),
 	SYN(0b00000010),
 	RST(0b00000100),
