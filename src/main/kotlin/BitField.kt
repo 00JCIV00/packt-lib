@@ -1,3 +1,4 @@
+import PacktUtils.toByteArray
 import java.util.BitSet
 import kotlin.reflect.full.memberProperties
 
@@ -32,21 +33,17 @@ data class BitField(val bits: BitSet, val size: Int) {
 
 			return BitField(bits, size)
 		}
-
-		private fun Number.toByteArray(bytes: Int): ByteArray {
-			val num = this.toLong()
-			//println(num.toString(2))
-			return buildList {
-				for (b in 0..<bytes) {
-					add((num shr (b * 8)).toByte())
-				}
-				/*this.forEachIndexed { idx, byte: Byte ->
-					val ubyte = byte.toUByte()
-					println("$idx: ${ubyte.toString(2).padStart(8, '0')}")
-				}*/
-			}.toByteArray()
-		}
 	}
+
+	/**
+	 * 11001100 00001111 00001111 10110011
+	 * 0. add 00001100
+	 * 1. add 10101010
+	 * 2. add 00001111
+	 * BE 11111111 11111111 11111111 00000001
+	 * LE 10000001 11111111 11111111 11111111
+	 */
+
 
 	init {
 		if (size <= 0) throw NegativeBitFieldSizeException()

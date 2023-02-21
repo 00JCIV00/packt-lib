@@ -1,4 +1,18 @@
-abstract class Packet() {
+/**
+ *
+ * Resources:
+ * - [IETF](https://datatracker.ietf.org/doc/html/rfc791)
+ * - [Wikipedia](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#Header)
+ */
+
+package Packets
+
+import BitField
+import BitFieldGroup
+import PacktUtils.toIPInt
+import PacktUtils.validateIP
+
+abstract class BasePacket() {
 	abstract val fieldGroups: MutableList<BitFieldGroup>
 	val numBits get() = fieldGroups.sumOf { it.size }
 	val numBytes get() = numBits / 8
@@ -7,7 +21,8 @@ abstract class Packet() {
 		return buildString {
 			append(
 				"""
-			     0                   1                   2                   3
+				               |               |               |               |	
+			     0             v     1         v         2     v             3 v
 			     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 			   	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 			   	""".trimIndent()
@@ -35,16 +50,16 @@ abstract class Packet() {
 	}
 
 	class IPHeader(name: String = "ip-header"): BitFieldGroup(name) {
-		var version: Int = 0
-		var headerLen: Int = 0
-		var serviceType: Int = 0
-		var totalLen: Int = 0
-		var id: Int = 0
-		var flags: Int = 0
-		var fragmentOffset: Int = 0
-		var ttl: Int = 0
-		var protocol: Int = 0
-		var headerChecksum: Int = 0
+		var version: Byte = 0
+		var headerLen: Byte = 0
+		var serviceType: Byte = 0
+		var totalLen: Short = 0
+		var id: Short = 0
+		var flags: Byte = 0
+		var fragmentOffset: Short = 0
+		var ttl: Byte = 0
+		var protocol: Byte = 0
+		var headerChecksum: Short = 0
 		var sourceAddr: String = "0.0.0.0"
 			set (strIP) { field = validateIP(strIP) }
 		var destAddr: String = "0.0.0.0"
@@ -64,4 +79,14 @@ abstract class Packet() {
 			fields["destAddr"] = BitField.from(destAddr.toIPInt(), 32)
 		}
 	}
+}
+
+enum class IPProtocols(val value: UByte) {
+	ICMP(1u),
+	IGMP(2u),
+	TCP(6u),
+	UDP(17u),
+	ENCAP(41u),
+	OSPF(88u),
+	SCTP(132u)
 }

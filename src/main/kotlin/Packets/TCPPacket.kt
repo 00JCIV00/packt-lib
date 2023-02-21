@@ -1,8 +1,13 @@
+package Packets
+
+import BitField
+import BitFieldGroup
+
 /**
  * https://www.ietf.org/rfc/rfc9293.html
  */
 
-class TCPPacket(): Packet() {
+class TCPPacket(): BasePacket() {
 	override val fieldGroups: MutableList<BitFieldGroup> = mutableListOf()
 
 	fun tcpHeader(init: TCPHeader.() -> Unit): BitFieldGroup {
@@ -18,16 +23,16 @@ class TCPPacket(): Packet() {
 	}
 
 	class TCPHeader(name: String = "tcp-header"): BitFieldGroup(name) {
-		var sourcePort: Int = 0
-		var destPort: Int = 0
+		var sourcePort: Short = 0
+		var destPort: Short = 0
 		var seqNum: Int = 0
 		var ackNum: Int = 0
-		var dataOffset: Int = 0
-		var reserved: Int = 0
-		var flags: Int = TCPFlags.FIN.bits
-		var window: Int = 0
-		var checksum: Int = 0
-		var urgPointer: Int = 0
+		var dataOffset: Byte = 0
+		var reserved: Byte = 0
+		var flags: UByte = TCPFlags.FIN.value
+		var window: Short = 0
+		var checksum: Short = 0
+		var urgPointer: Short = 0
 		var options: Int = 0
 		fun fillFields() {
 			fields["sourcePort"] = BitField.from(sourcePort, 16)
@@ -51,13 +56,13 @@ fun tcpPacket(init: TCPPacket.() -> Unit): TCPPacket {
 	return tcpPacket
 }
 
-enum class TCPFlags(val bits: Int) {
-	FIN(0b00000001),
-	SYN(0b00000010),
-	RST(0b00000100),
-	PSH(0b00001000),
-	ACK(0b00010000),
-	URG(0b00100000),
-	ECE(0b01000000),
-	CWR(0b10000000)
+enum class TCPFlags(val value: UByte) {
+	FIN(0b00000001u),
+	SYN(0b00000010u),
+	RST(0b00000100u),
+	PSH(0b00001000u),
+	ACK(0b00010000u),
+	URG(0b00100000u),
+	ECE(0b01000000u),
+	CWR(0b10000000u)
 }
