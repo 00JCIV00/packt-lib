@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="packt-lib-jvm-0.0.1a">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="packt-lib-jvm-0.0.1a.jar" />
+  </artifact>
+</component>
