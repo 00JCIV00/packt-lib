@@ -3,9 +3,19 @@ package Packets
 import BitField
 import BitFieldGroup
 
+/**
+ * A simple representation of an ICMP Packet.
+ *
+ * Resources:
+ * - [IETF](https://datatracker.ietf.org/doc/html/rfc792)
+ * - [Wikipedia](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol)
+ */
 class ICMPPacket: BasePacket() {
 	override val fieldGroups: MutableList<BitFieldGroup> = mutableListOf()
 
+	/**
+	 * DSL method to create an [ICMPHeader].
+	 */
 	fun icmpHeader(init: ICMPHeader.() -> Unit): BitFieldGroup {
 		val icmpHeader = ICMPHeader()
 		icmpHeader.init()
@@ -14,10 +24,16 @@ class ICMPPacket: BasePacket() {
 		return icmpHeader
 	}
 
+	/**
+	 * DSL method to add raw [data] as a [BitFieldGroup] to this [ICMPPacket].
+	 */
 	fun data(data: Any) {
 		fieldGroups.add(BitFieldGroup.from("data", data))
 	}
 
+	/**
+	 * A [BitFieldGroup] representation of ICMP Header data.
+	 */
 	class ICMPHeader(name: String = "icmp-header"): BitFieldGroup(name) {
 		var type: UByte = 0u
 		var code: UByte = 0u
@@ -32,12 +48,18 @@ class ICMPPacket: BasePacket() {
 	}
 }
 
+/**
+ * DSL method to create an [ICMPPacket].
+ */
 fun icmpPacket(init: ICMPPacket.() -> Unit): ICMPPacket {
 	val ICMPPacket = ICMPPacket()
 	ICMPPacket.init()
 	return ICMPPacket
 }
 
+/**
+ * A collection of ICMP Types and their associated [value]s.
+ */
 enum class ICMPTypes(val value: UByte) {
 	DEST_UNREACHABLE(3u),
 	TIME_EXCEEDED(11u),
@@ -52,6 +74,9 @@ enum class ICMPTypes(val value: UByte) {
 	INFO_REPLY(16u);
 }
 
+/**
+ * A collection of ICMP Codes for various ICMP Types along with their associated values.
+ */
 class ICMPCodes() {
 	companion object {
 		enum class DestUnreachable(val value: UByte) {

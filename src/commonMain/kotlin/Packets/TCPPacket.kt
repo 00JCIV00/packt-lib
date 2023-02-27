@@ -4,12 +4,17 @@ import BitField
 import BitFieldGroup
 
 /**
- * https://www.ietf.org/rfc/rfc9293.html
+ * A simple representation of a TCP Packet.
+ *
+ * Resources:
+ * - [IETF](https://www.ietf.org/rfc/rfc9293.html)
  */
-
 class TCPPacket(): BasePacket() {
 	override val fieldGroups: MutableList<BitFieldGroup> = mutableListOf()
 
+	/**
+	 * DSL method to create an [TCPHeader].
+	 */
 	fun tcpHeader(init: TCPHeader.() -> Unit): BitFieldGroup {
 		val tcpHeader = TCPHeader()
 		tcpHeader.init()
@@ -18,10 +23,16 @@ class TCPPacket(): BasePacket() {
 		return tcpHeader
 	}
 
+	/**
+	 * DSL method to add raw [data] as a [BitFieldGroup] to this [TCPPacket].
+	 */
 	fun data(data: Any) {
 		fieldGroups.add(BitFieldGroup.from("data", data))
 	}
 
+	/**
+	 * DSL method to create a [TCPHeader].
+	 */
 	class TCPHeader(name: String = "tcp-header"): BitFieldGroup(name) {
 		var sourcePort: Short = 0
 		var destPort: Short = 0
@@ -50,12 +61,18 @@ class TCPPacket(): BasePacket() {
 	}
 }
 
+/**
+ * DSL method to create a [TCPPacket].
+ */
 fun tcpPacket(init: TCPPacket.() -> Unit): TCPPacket {
 	val tcpPacket = TCPPacket()
 	tcpPacket.init()
 	return tcpPacket
 }
 
+/**
+ * A collection of TCP Flags and their associated [value]s.
+ */
 enum class TCPFlags(val value: UByte) {
 	FIN(0b00000001u),
 	SYN(0b00000010u),

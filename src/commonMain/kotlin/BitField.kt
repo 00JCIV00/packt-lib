@@ -3,10 +3,13 @@ import PacktUtils.toByteArray
 import PacktUtils.toInt
 
 /**
- * Immutable BitField Wrapper for Java's BitSet
+ * An immutable BitField to represent exactly N bits.
  */
 data class BitField(val bits: List<Boolean>, val size: Int) {
 	companion object {
+		/**
+		 * Creates a [BitField] of a fixed [size] from a Primitive Number (signed or unsigned), Character, or String ([data]). By default, this will [truncate] the given [data] to match the given [size].
+		 */
 		fun from(data: Any,
 				 size: Int,
 				 truncate: Boolean = true): BitField {
@@ -20,6 +23,7 @@ data class BitField(val bits: List<Boolean>, val size: Int) {
 				is UInt  -> data.toInt().toByteArray(4)
 				is Long -> data.toByteArray(8)
 				is ULong -> data.toLong().toByteArray(8)
+				is Char -> data.code.toShort().toByteArray(2)
 				is String -> data.toByteArray()
 				else -> throw NoByteArrayConversionException()
 			}
@@ -47,8 +51,11 @@ data class BitField(val bits: List<Boolean>, val size: Int) {
 			if(setSize >= 0) append(" Set Size: $setSize.")
 		}
 	)
-
 	class NegativeBitFieldSizeException(message: String = "The provided size is negative."): Exception(message)
+
+	/**
+	 * Returns the String representation of this [BitField] in Big Endian.
+	 */
 	@OptIn(ExperimentalStdlibApi::class)
 	override fun toString(): String {
 		return buildString {
@@ -56,6 +63,9 @@ data class BitField(val bits: List<Boolean>, val size: Int) {
 		}.reversed().padStart(size, '0')
 	}
 
+	/**
+	 * Returns the [ByteArray] representation of this [BitField] in Big Endian.
+	 */
 	fun toByteArray(): ByteArray {
 		return buildList {
 			for (byteBits in bits.chunked(8)) {
