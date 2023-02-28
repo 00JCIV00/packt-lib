@@ -4,7 +4,7 @@ A small Kotlin library to build and send basic packets based on IETF specificati
 ---
 
 # Overview
-This project is an experiment to learn more about the basics of how packets by coding parts of the IETF spec in Kotlin, a language I enjoy. Optimally, the library would allow users to manipulate packets either directly or through a DSL.
+This project is an experiment to learn more about the basics of how packets work by coding parts of the IETF spec in Kotlin, a language I enjoy. Optimally, the library would allow users to manipulate packets either directly or through a DSL.
 
 # Issues
 Unfortunately, using Kotlin has introduced a number of challenges in terms of packet crafting and manipulation:
